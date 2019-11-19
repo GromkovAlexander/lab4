@@ -35,7 +35,11 @@ public class JSCodeExecutorActor extends AbstractActor {
 
                             String res = execJSCode(packageInputJS, test);
 
-                            
+                            boolean isCorrectAnswer = res.equals(test.getExpectedResults());
+
+
+
+
 
                         }
                 )

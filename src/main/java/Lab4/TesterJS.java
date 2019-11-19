@@ -1,6 +1,7 @@
 package Lab4;
 
 import Lab4.Actors.MainActor;
+import Lab4.Packages.PackageInputJS;
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -8,6 +9,7 @@ import akka.actor.Props;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
+import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
@@ -53,7 +55,12 @@ public class TesterJS extends AllDirectives {
 
     private Route testJsRoute(ActorRef mainActor) {
         return post(
-                () ->
+                () -> entity(Jackson.unmarshaller(PackageInputJS.class),
+                        msg -> {
+                            mainActor.tell(msg, ActorRef.noSender());
+                            return complete("Message posted");
+                }
+                        )
 
         );
     }

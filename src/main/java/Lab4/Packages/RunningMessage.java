@@ -7,6 +7,7 @@ public class RunningMessage {
     private Pair<Integer, PackageInputJS> msg;
 
     public RunningMessage(Pair<Integer, PackageInputJS> msg) {
+
         this.msg = msg;
     }
 

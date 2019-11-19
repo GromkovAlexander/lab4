@@ -8,6 +8,9 @@ import akka.actor.Props;
 import akka.japi.pf.ReceiveBuilder;
 import akka.routing.RoundRobinPool;
 
+import javafx.util.Pair;
+
+
 public class MainActor extends AbstractActor {
 
     private final static int MAX_ROUND_ROBIN_POOL = 5;
@@ -26,7 +29,8 @@ public class MainActor extends AbstractActor {
                 .match(
                         PackageInputJS.class, pkt -> {
                             for (int i = 0; i < pkt.getTests().length; i++) {
-                                performers.tell(new RunningMessage(Pair));
+                                performers.tell(new RunningMessage(new Pair<>(i, pkt)),
+                                        storage);
                             }
                         }
                 )

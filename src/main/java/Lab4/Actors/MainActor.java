@@ -14,7 +14,7 @@ public class MainActor extends AbstractActor {
 
     public MainActor() {
         performers = getContext().actorOf(new RoundRobinPool(MAX_ROUND_ROBIN_POOL).props(Props.create(JSCodeExecutorActor.class)));
-        storage = getContext().actorOf(Props.create())
+        storage = getContext().actorOf(Props.create(StorageActor.class));
     }
 
     @Override

@@ -1,8 +1,10 @@
 package Lab4.Actors;
 
+import Lab4.Packages.PackageInputJS;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
+import akka.japi.pf.ReceiveBuilder;
 import akka.routing.RoundRobinPool;
 
 public class MainActor extends AbstractActor {
@@ -19,6 +21,14 @@ public class MainActor extends AbstractActor {
 
     @Override
     public Receive createReceive() {
-        return null;
+        return ReceiveBuilder.create()
+                .match(
+                        PackageInputJS.class, pkt -> {
+                            for (int i = 0; i < pkt.getTests().length; i++) {
+                                performers.tell();
+                            }
+                        }
+                )
+                .build();
     }
 }

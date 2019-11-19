@@ -13,12 +13,12 @@ public class Test {
 
     private String testName;
     private String expectedResults;
-    private Array params;
+    private Object[] params;
 
     @JsonCreator
     public Test(@JsonProperty(TEST_NAME) String testName,
                 @JsonProperty(EXPECTED_RESULTS) String expectedResults,
-                @JsonProperty(PARAMS) Array params) {
+                @JsonProperty(PARAMS) Object[] params) {
         this.testName = testName;
         this.expectedResults = expectedResults;
         this.params = params;
@@ -40,11 +40,11 @@ public class Test {
         this.expectedResults = expectedResults;
     }
 
-    public Array getParams() {
+    public Object[] getParams() {
         return params;
     }
 
-    public void setParams(Array params) {
+    public void setParams(Object[] params) {
         this.params = params;
     }
 }

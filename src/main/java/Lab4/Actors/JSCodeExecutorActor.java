@@ -2,8 +2,10 @@ package Lab4.Actors;
 
 import Lab4.Packages.PackageInputJS;
 import Lab4.Packages.RunningMessage;
+import Lab4.Packages.StorrageMessage;
 import Lab4.Packages.Test;
 import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
 import akka.japi.pf.ReceiveBuilder;
 
 import javafx.util.Pair;
@@ -37,9 +39,16 @@ public class JSCodeExecutorActor extends AbstractActor {
 
                             boolean isCorrectAnswer = res.equals(test.getExpectedResults());
 
+                            StorrageMessage storrageMessage = new StorrageMessage(
+                                    packageInputJS.getPackageId(),
+                                    res,
+                                    test.getExpectedResults(),
+                                    isCorrectAnswer,
+                                    test.getParams(),
+                                    test.getTestName()
+                            );
 
-
-
+                            getSender().tell(storrageMessage, ActorRef.noSender());
 
                         }
                 )

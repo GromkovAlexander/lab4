@@ -29,8 +29,7 @@ public class MainActor extends AbstractActor {
                 .match(
                         PackageInputJS.class, pkt -> {
                             for (int i = 0; i < pkt.getTests().length; i++) {
-                                performers.tell(new RunningMessage(new Pair<>(i, pkt)),
-                                        storage);
+                                performers.tell(new RunningMessage(new Pair<>(i, pkt)), storage);
                             }
                         }
                 )

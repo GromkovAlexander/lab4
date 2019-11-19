@@ -1,6 +1,7 @@
 package Lab4.Actors;
 
 import Lab4.Packages.PackageInputJS;
+import Lab4.Packages.RunningMessage;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
@@ -25,7 +26,7 @@ public class MainActor extends AbstractActor {
                 .match(
                         PackageInputJS.class, pkt -> {
                             for (int i = 0; i < pkt.getTests().length; i++) {
-                                performers.tell();
+                                performers.tell(new RunningMessage(Pair));
                             }
                         }
                 )

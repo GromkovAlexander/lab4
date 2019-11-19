@@ -10,5 +10,11 @@ public class RunningMessage {
         this.msg = msg;
     }
 
+    public Pair<Integer, PackageInputJS> getMsg() {
+        return msg;
+    }
 
+    public void setMsg(Pair<Integer, PackageInputJS> msg) {
+        this.msg = msg;
+    }
 }

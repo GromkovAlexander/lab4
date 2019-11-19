@@ -16,6 +16,8 @@ import akka.stream.javadsl.Flow;
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 
+import static akka.http.javadsl.server.Directives.post;
+
 public class TesterJS {
 
     private final static String ROUTES = "routes";
@@ -48,7 +50,10 @@ public class TesterJS {
     }
 
     private Route testJsRoute(ActorRef mainActor) {
-        return ;
+        return post(
+                () ->
+
+        );
     }
 
 

@@ -2,28 +2,18 @@ package Lab4.Packages;
 
 public class StorrageMessage {
 
-    private int packageId;
     private String res;
     private String expectedRes;
     private boolean isCorrectAnswer;
     private Object[] params;
     private String testName;
 
-    public StorrageMessage(int packageId, String res, String expectedRes, boolean isCorrectAnswer, Object[] params, String testName) {
-        this.packageId = packageId;
+    public StorrageMessage( String res, String expectedRes, boolean isCorrectAnswer, Object[] params, String testName) {
         this.res = res;
         this.expectedRes = expectedRes;
         this.isCorrectAnswer = isCorrectAnswer;
         this.params = params;
         this.testName = testName;
-    }
-
-    public int getPackageId() {
-        return packageId;
-    }
-
-    public void setPackageId(int packageId) {
-        this.packageId = packageId;
     }
 
     public String getRes() {

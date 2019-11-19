@@ -82,11 +82,14 @@ public class StorageActor extends AbstractActor {
                 .match(
                         StorrageCommand.class, msg -> {
                             if (storage.containsKey(msg.getPackageId())) {
-
+                                ArrayList<StorrageMessage> tests = storage.get(msg.getPackageId());
+                                tests.add(msg.getStorrageMessage());
+                                storage.put(msg.getPackageId(), tests);
                             } else {
-
+                                ArrayList<StorrageMessage> tests = new ArrayList<>();
+                                tests.add(msg.getStorrageMessage());
+                                storage.put(msg.getPackageId(), tests);
                             }
-
                         }
                 )
                 .build();

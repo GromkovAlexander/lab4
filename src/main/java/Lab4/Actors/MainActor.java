@@ -13,6 +13,8 @@ public class MainActor extends AbstractActor {
 
         performers = getContext().actorOf(
                 new RoundRobinPool(5)
+                        .withSupervisorStrategy(strategy)
+                        .props(Props.create(TestPerformerActor.class, logResultsActor)),
                 "routerForTests"
         );
     }

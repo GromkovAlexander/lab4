@@ -11,11 +11,12 @@ import javafx.util.Pair;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 
 public class JSCodeExecutorActor extends AbstractActor {
 
-    private String execJSCode(PackageInputJS packageInputJS, Test test) {
+    private String execJSCode(PackageInputJS packageInputJS, Test test) throws ScriptException, NoSuchMethodException {
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
         engine.eval(packageInputJS.getJsScript());
         Invocable invocable = (Invocable) engine;
@@ -32,11 +33,9 @@ public class JSCodeExecutorActor extends AbstractActor {
                             PackageInputJS packageInputJS = m.getMsg().getValue();
                             Test test = packageInputJS.getTests()[index];
 
+                            String res = execJSCode(packageInputJS, test);
 
-                            ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-                            engine.eval(packageInputJS.getJsScript());
-                            Invocable invocable = (Invocable) engine;
-                            String res = invocable.invokeFunction(packageInputJS.getFunctionName(), test.getParams()).toString();
+                            
 
                         }
                 )

@@ -28,6 +28,7 @@ public class TesterJS extends AllDirectives {
     private final static String LOCALHOST = "localhost";
     private final static int LOCALHOST_PORT = 8080;
     private final static String SERVER_ONLINE_MESSAGE = "Server online at http://localhost:" + LOCALHOST_PORT + "/\nPress RETURN to stop...";
+    private final static String POST_MESSAGE = "Message posted";
 
     public static void main(String[] args) throws IOException {
         ActorSystem system = ActorSystem.create(ROUTES);
@@ -58,9 +59,9 @@ public class TesterJS extends AllDirectives {
                 () -> entity(Jackson.unmarshaller(PackageInputJS.class),
                         msg -> {
                             mainActor.tell(msg, ActorRef.noSender());
-                            return complete("Message posted");
-                }
-                        )
+                            return complete(POST_MESSAGE);
+                        }
+                )
 
         );
     }

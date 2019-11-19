@@ -1,5 +1,6 @@
 package Lab4;
 
+import Lab4.Actors.MainActor;
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -12,13 +13,14 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import akka.http.javadsl.server.AllDirectives;
+
 
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 
-import static akka.http.javadsl.server.Directives.post;
 
-public class TesterJS {
+public class TesterJS extends AllDirectives {
 
     private final static String ROUTES = "routes";
     private final static String LOCALHOST = "localhost";

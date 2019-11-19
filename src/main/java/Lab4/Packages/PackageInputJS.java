@@ -1,4 +1,9 @@
 package Lab4.Packages;
 
-public class PackageJS {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class PackageInputJS {
+
+    public PackageInputJS(@JsonProperty())
+
 }

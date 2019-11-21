@@ -57,8 +57,7 @@ public class TesterJS extends AllDirectives {
     private Route testJsRoute(ActorRef mainActor) {
         return post(
                 () -> entity(
-                        Jackson.unmarshaller(PackageInputJS.class),
-                        msg -> {
+                        Jackson.unmarshaller(PackageInputJS.class), msg -> {
                             mainActor.tell(msg, ActorRef.noSender());
                             return complete(POST_MESSAGE);
                         }

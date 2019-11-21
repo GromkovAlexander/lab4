@@ -11,7 +11,7 @@ import java.util.*;
 public class StorageActor extends AbstractActor {
 
 
-    private HashMap<Integer, ArrayList<StorrageMessage>> storage = new Map<Integer, ArrayList<StorrageMessage>>();
+    private HashMap<Integer, ArrayList<StorrageMessage>> storage = new HashMap<>();
 
     @Override
     public Receive createReceive() {

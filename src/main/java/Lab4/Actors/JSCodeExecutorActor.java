@@ -13,11 +13,11 @@ import javax.script.ScriptException;
 
 public class JSCodeExecutorActor extends AbstractActor {
 
-    private String execJSCode(PostInput postInput, Test test) throws ScriptException, NoSuchMethodException {
+    private String execJSCode(PostMessage postMessage, Test test) throws ScriptException, NoSuchMethodException {
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-        engine.eval(postInput.getJsScript());
+        engine.eval(postMessage.getJsScript());
         Invocable invocable = (Invocable) engine;
-        return invocable.invokeFunction(postInput.getFunctionName(), test.getParams()).toString();
+        return invocable.invokeFunction(postMessage.getFunctionName(), test.getParams()).toString();
     }
 
     @Override
@@ -27,10 +27,10 @@ public class JSCodeExecutorActor extends AbstractActor {
                         RunningMessage.class, m -> {
 
                             int index = m.getMsg().getKey();
-                            PostInput postInput = m.getMsg().getValue();
-                            Test test = postInput.getTests()[index];
+                            PostMessage postMessage = m.getMsg().getValue();
+                            Test test = postMessage.getTests()[index];
 
-                            String res = execJSCode(postInput, test);
+                            String res = execJSCode(postMessage, test);
 
                             boolean isCorrectAnswer = res.equals(test.getExpectedResults());
 
@@ -43,7 +43,7 @@ public class JSCodeExecutorActor extends AbstractActor {
                             );
 
                             StorrageTestInfo storrageTestInfo = new StorrageTestInfo(
-                                    postInput.getPackageId(),
+                                    postMessage.getPackageId(),
                                     testInfo
                             );
 

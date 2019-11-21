@@ -4,13 +4,13 @@ import javafx.util.Pair;
 
 public class RunningMessage {
 
-    private final Pair<Integer, PostInput> msg;
+    private final Pair<Integer, PostMessage> msg;
 
-    public RunningMessage(Pair<Integer, PostInput> msg) {
+    public RunningMessage(Pair<Integer, PostMessage> msg) {
         this.msg = msg;
     }
 
-    public Pair<Integer, PostInput> getMsg() {
+    public Pair<Integer, PostMessage> getMsg() {
         return msg;
     }
 }

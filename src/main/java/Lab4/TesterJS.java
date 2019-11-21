@@ -1,7 +1,7 @@
 package Lab4;
 
 import Lab4.Actors.MainActor;
-import Lab4.Packages.PostInput;
+import Lab4.Packages.PostMessage;
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -13,6 +13,7 @@ import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.server.Route;
+import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import akka.http.javadsl.server.AllDirectives;
@@ -20,6 +21,7 @@ import akka.http.javadsl.server.AllDirectives;
 
 import java.io.IOException;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.Future;
 
 
 public class TesterJS extends AllDirectives {
@@ -55,15 +57,27 @@ public class TesterJS extends AllDirectives {
     }
 
     private Route testJsRoute(ActorRef mainActor) {
-        return post(
-                () -> entity(
-                        Jackson.unmarshaller(PostInput.class), msg -> {
-                            mainActor.tell(msg, ActorRef.noSender());
-                            return complete(POST_MESSAGE);
-                        }
-                )
+        return concat(
+                post(
+                        () -> entity(
+                                Jackson.unmarshaller(PostMessage.class), msg -> {
+                                    mainActor.tell(msg, ActorRef.noSender());
+                                    return complete(POST_MESSAGE);
+                                }
+                        )
 
-        );
+                ),
+                get(
+                        () -> (parameter("packageId", (packageId) -> {
+                                    Future<Object> res = Patterns.ask(
+                                            mainActor,
+
+
+                                    )
+                        }
+                        )
+                )
+        )
     }
 
 

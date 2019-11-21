@@ -24,7 +24,7 @@ public class JSCodeExecutorActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(
-                        RunningMessage.class, m -> {
+                        JSTestToExec.class, m -> {
 
                             int index = m.getMsg().getKey();
                             PostMessage postMessage = m.getMsg().getValue();

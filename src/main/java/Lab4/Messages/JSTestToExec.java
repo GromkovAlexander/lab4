@@ -2,11 +2,11 @@ package Lab4.Messages;
 
 import javafx.util.Pair;
 
-public class RunningMessage {
+public class JSTestToExec {
 
     private final Pair<Integer, PostMessage> msg;
 
-    public RunningMessage(Pair<Integer, PostMessage> msg) {
+    public JSTestToExec(Pair<Integer, PostMessage> msg) {
         this.msg = msg;
     }
 

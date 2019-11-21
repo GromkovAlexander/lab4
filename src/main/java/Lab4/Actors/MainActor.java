@@ -2,7 +2,7 @@ package Lab4.Actors;
 
 import Lab4.Messages.GetMessage;
 import Lab4.Messages.PostMessage;
-import Lab4.Messages.RunningMessage;
+import Lab4.Messages.JSTestToExec;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
@@ -30,7 +30,7 @@ public class MainActor extends AbstractActor {
                 .match(
                         PostMessage.class, msg -> {
                             for (int i = 0; i < msg.getTests().length; i++) {
-                                performers.tell(new RunningMessage(new Pair<>(i, msg)), storage);
+                                performers.tell(new JSTestToExec(new Pair<>(i, msg)), storage);
                             }
                         }
                 )

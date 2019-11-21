@@ -1,4 +1,4 @@
-package Lab4.Packages;
+package Lab4.Messages;
 
 import javafx.util.Pair;
 

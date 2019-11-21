@@ -1,6 +1,6 @@
 package Lab4.Actors;
 
-import Lab4.Packages.*;
+import Lab4.Messages.*;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.japi.pf.ReceiveBuilder;

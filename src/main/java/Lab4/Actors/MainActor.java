@@ -1,7 +1,7 @@
 package Lab4.Actors;
 
-import Lab4.Packages.PostMessage;
-import Lab4.Packages.RunningMessage;
+import Lab4.Messages.PostMessage;
+import Lab4.Messages.RunningMessage;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;

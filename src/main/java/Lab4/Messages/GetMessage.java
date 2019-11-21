@@ -1,4 +1,4 @@
-package Lab4.Packages;
+package Lab4.Messages;
 
 public class GetMessage {
     private final int packageId;

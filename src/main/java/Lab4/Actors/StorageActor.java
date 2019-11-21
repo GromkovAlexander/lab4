@@ -1,7 +1,7 @@
 package Lab4.Actors;
 
-import Lab4.Packages.StorrageTestInfo;
-import Lab4.Packages.TestInfo;
+import Lab4.Messages.StorrageTestInfo;
+import Lab4.Messages.TestInfo;
 import akka.actor.AbstractActor;
 import akka.japi.pf.ReceiveBuilder;
 

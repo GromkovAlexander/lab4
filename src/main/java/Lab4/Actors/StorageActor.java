@@ -1,8 +1,10 @@
 package Lab4.Actors;
 
+import Lab4.Messages.GetMessage;
 import Lab4.Messages.StorrageTestInfo;
 import Lab4.Messages.TestInfo;
 import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
 import akka.japi.pf.ReceiveBuilder;
 
 import java.util.*;
@@ -26,6 +28,11 @@ public class StorageActor extends AbstractActor {
                                 tests.add(msg.getTestInfo());
                                 storage.put(msg.getPackageId(), tests);
                             }
+                        }
+                )
+                .match(
+                        GetMessage.class, msg -> {
+                            getSender().tell(storage.get(msg.getPackageId()), ActorRef.noSender());
                         }
                 )
                 .build();

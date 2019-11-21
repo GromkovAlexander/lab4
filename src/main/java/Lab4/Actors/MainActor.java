@@ -1,5 +1,6 @@
 package Lab4.Actors;
 
+import Lab4.Messages.GetMessage;
 import Lab4.Messages.PostMessage;
 import Lab4.Messages.RunningMessage;
 import akka.actor.AbstractActor;
@@ -27,10 +28,15 @@ public class MainActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(
-                        PostMessage.class, pkt -> {
-                            for (int i = 0; i < pkt.getTests().length; i++) {
-                                performers.tell(new RunningMessage(new Pair<>(i, pkt)), storage);
+                        PostMessage.class, msg -> {
+                            for (int i = 0; i < msg.getTests().length; i++) {
+                                performers.tell(new RunningMessage(new Pair<>(i, msg)), storage);
                             }
+                        }
+                )
+                .match(
+                        GetMessage.class, msg -> {
+                            storage.tell(msg, sender());
                         }
                 )
                 .build();

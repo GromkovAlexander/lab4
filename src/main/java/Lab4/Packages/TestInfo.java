@@ -1,6 +1,6 @@
 package Lab4.Packages;
 
-public class StorrageMessage {
+public class TestInfo {
 
     private final String res;
     private final String expectedRes;
@@ -8,7 +8,7 @@ public class StorrageMessage {
     private final Object[] params;
     private final String testName;
 
-    public StorrageMessage( String res, String expectedRes, boolean isCorrectAnswer, Object[] params, String testName) {
+    public TestInfo(String res, String expectedRes, boolean isCorrectAnswer, Object[] params, String testName) {
         this.res = res;
         this.expectedRes = expectedRes;
         this.isCorrectAnswer = isCorrectAnswer;

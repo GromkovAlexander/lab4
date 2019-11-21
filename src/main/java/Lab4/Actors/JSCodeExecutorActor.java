@@ -5,8 +5,6 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.japi.pf.ReceiveBuilder;
 
-import javafx.util.Pair;
-
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -15,11 +13,11 @@ import javax.script.ScriptException;
 
 public class JSCodeExecutorActor extends AbstractActor {
 
-    private String execJSCode(PackageInputJS packageInputJS, Test test) throws ScriptException, NoSuchMethodException {
+    private String execJSCode(PostInput postInput, Test test) throws ScriptException, NoSuchMethodException {
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-        engine.eval(packageInputJS.getJsScript());
+        engine.eval(postInput.getJsScript());
         Invocable invocable = (Invocable) engine;
-        return invocable.invokeFunction(packageInputJS.getFunctionName(), test.getParams()).toString();
+        return invocable.invokeFunction(postInput.getFunctionName(), test.getParams()).toString();
     }
 
     @Override
@@ -29,14 +27,14 @@ public class JSCodeExecutorActor extends AbstractActor {
                         RunningMessage.class, m -> {
 
                             int index = m.getMsg().getKey();
-                            PackageInputJS packageInputJS = m.getMsg().getValue();
-                            Test test = packageInputJS.getTests()[index];
+                            PostInput postInput = m.getMsg().getValue();
+                            Test test = postInput.getTests()[index];
 
-                            String res = execJSCode(packageInputJS, test);
+                            String res = execJSCode(postInput, test);
 
                             boolean isCorrectAnswer = res.equals(test.getExpectedResults());
 
-                            StorrageMessage storrageMessage = new StorrageMessage(
+                            TestInfo testInfo = new TestInfo(
                                     res,
                                     test.getExpectedResults(),
                                     isCorrectAnswer,
@@ -44,12 +42,12 @@ public class JSCodeExecutorActor extends AbstractActor {
                                     test.getTestName()
                             );
 
-                            StorrageCommand storrageCommand = new StorrageCommand(
-                                    packageInputJS.getPackageId(),
-                                    storrageMessage
+                            StorrageTestInfo storrageTestInfo = new StorrageTestInfo(
+                                    postInput.getPackageId(),
+                                    testInfo
                             );
 
-                            getSender().tell(storrageCommand, ActorRef.noSender());
+                            getSender().tell(storrageTestInfo, ActorRef.noSender());
 
                         }
                 )

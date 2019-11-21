@@ -1,19 +1,19 @@
 package Lab4.Packages;
 
-public class StorrageCommand {
+public class StorrageTestInfo {
     private final int packageId;
-    private final StorrageMessage storrageMessage;
+    private final TestInfo testInfo;
 
-    public StorrageCommand(int packageId, StorrageMessage storrageMessage) {
+    public StorrageTestInfo(int packageId, TestInfo testInfo) {
         this.packageId = packageId;
-        this.storrageMessage = storrageMessage;
+        this.testInfo = testInfo;
     }
 
     public int getPackageId() {
         return packageId;
     }
 
-    public StorrageMessage getStorrageMessage() {
-        return storrageMessage;
+    public TestInfo getTestInfo() {
+        return testInfo;
     }
 }

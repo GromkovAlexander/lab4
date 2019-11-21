@@ -1,8 +1,7 @@
 package Lab4.Actors;
 
-import Lab4.Packages.PackageInputJS;
-import Lab4.Packages.StorrageCommand;
-import Lab4.Packages.StorrageMessage;
+import Lab4.Packages.StorrageTestInfo;
+import Lab4.Packages.TestInfo;
 import akka.actor.AbstractActor;
 import akka.japi.pf.ReceiveBuilder;
 
@@ -11,20 +10,20 @@ import java.util.*;
 public class StorageActor extends AbstractActor {
 
 
-    private HashMap<Integer, ArrayList<StorrageMessage>> storage = new HashMap<>();
+    private HashMap<Integer, ArrayList<TestInfo>> storage = new HashMap<>();
 
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(
-                        StorrageCommand.class, msg -> {
+                        StorrageTestInfo.class, msg -> {
                             if (storage.containsKey(msg.getPackageId())) {
-                                ArrayList<StorrageMessage> tests = storage.get(msg.getPackageId());
-                                tests.add(msg.getStorrageMessage());
+                                ArrayList<TestInfo> tests = storage.get(msg.getPackageId());
+                                tests.add(msg.getTestInfo());
                                 storage.put(msg.getPackageId(), tests);
                             } else {
-                                ArrayList<StorrageMessage> tests = new ArrayList<>();
-                                tests.add(msg.getStorrageMessage());
+                                ArrayList<TestInfo> tests = new ArrayList<>();
+                                tests.add(msg.getTestInfo());
                                 storage.put(msg.getPackageId(), tests);
                             }
                         }

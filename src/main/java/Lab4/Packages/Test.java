@@ -7,7 +7,6 @@ public class Test {
 
     private final static String TEST_NAME = "testName";
     private final static String EXPECTED_RESULTS = "expectedResult";
-    
     private final static String PARAMS = "params";
 
     private final String testName;

@@ -1,7 +1,7 @@
 package Lab4;
 
 import Lab4.Actors.MainActor;
-import Lab4.Packages.PackageInputJS;
+import Lab4.Packages.PostInput;
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -57,7 +57,7 @@ public class TesterJS extends AllDirectives {
     private Route testJsRoute(ActorRef mainActor) {
         return post(
                 () -> entity(
-                        Jackson.unmarshaller(PackageInputJS.class), msg -> {
+                        Jackson.unmarshaller(PostInput.class), msg -> {
                             mainActor.tell(msg, ActorRef.noSender());
                             return complete(POST_MESSAGE);
                         }
